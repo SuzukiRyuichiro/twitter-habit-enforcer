@@ -1,13 +1,15 @@
-import React from 'react'
-import './App.css';
+import React, { Component } from 'react';
+import '../App.css';
 
+// firebase
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
-
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 
+// components
+import HabitList from './habit_list'
 
 if (!firebase.apps.length) {
   firebase.initializeApp({
@@ -24,15 +26,19 @@ if (!firebase.apps.length) {
 const auth = firebase.auth();
 const firestore = firebase.firestore();
 
-function App() {
+
+
+class App extends Component {
 
   // const [user] = useAuthState(auth);
 
-  return (
-    <div className="App">
-    <h1>hello wrld</h1>
-    </div>
-  );
+  render() {
+    return (
+      <div className="App">
+        <HabitList />
+      </div>
+    )
+  }
 }
 
 function SignIn() {
@@ -51,5 +57,6 @@ function SingOut() {
     <button onClick={() => auth.signOut()}>Sign Out</button>
   )
 }
+
 
 export default App;
