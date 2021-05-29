@@ -5,9 +5,11 @@ const Habit = (props) => {
 
   return (
     <div className="habit-card">
-      <div className="checkbox" onClick={() => setHabitCompletion(!habitCompletion)}>
-      </div>
       <div className="habit-description">
+        <div className="round">
+          <input type="checkbox" id={props.habit.id} onClick={() => setHabitCompletion(!habitCompletion)}/>
+          <label for={props.habit.id}></label>
+        </div>
         <h2>{ props.habit.content }</h2>
       </div>
     </div>
