@@ -12,6 +12,7 @@ import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 // components
 import HabitList from './components/habit_list'
+import Clock from './components/clock'
 
 if (!firebase.apps.length) {
   firebase.initializeApp({
@@ -37,7 +38,7 @@ function App() {
     <div className="App container">
         <header>
           <SingOut />
-          <h3>13:30</h3>
+          <Clock />
         </header>
         <section>
           {user ? <HabitList /> : <TwitterSignIn />}
