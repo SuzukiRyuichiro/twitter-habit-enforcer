@@ -10,7 +10,7 @@ import { useCollectionData } from 'react-firebase-hooks/firestore';
 const HabitList = () => {
   const firestore = firebase.firestore();
   const habitsRef = firestore.collection('habits');
-  const [habits] = useCollectionData(habitsRef, { idField: 'id' });
+  const [habits] = useCollectionData(habitsRef.orderBy('createdAt'), { idField: 'id' });
   const [input, setInput] = useState('');
 
   const addHabit = async (e) => {
@@ -22,6 +22,8 @@ const HabitList = () => {
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       uid
     })
+
+    setInput('');
   }
 
   return (
