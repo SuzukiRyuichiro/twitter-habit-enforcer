@@ -1,6 +1,6 @@
-import React from 'react'
+import React, {useState} from 'react'
 
-const Habit = () => {
+const Habit = (props) => {
   const [habitCompletion, setHabitCompletion] = useState(false);
 
   return (
@@ -8,8 +8,10 @@ const Habit = () => {
       <div className="checkbox" onClick={() => setHabitCompletion(!habitCompletion)}>
       </div>
       <div className="habit-description">
-        <h2>{ this.props.habit.content }</h2>
+        <h2>{ props.habit.content }</h2>
       </div>
     </div>
   )
 }
+
+export default Habit;

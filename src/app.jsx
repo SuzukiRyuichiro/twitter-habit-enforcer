@@ -1,5 +1,5 @@
-// import React, { Component } from 'react';
-import '../App.css';
+import React from 'react';
+import './App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 
@@ -11,7 +11,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 // components
-// import HabitList from './habit_list'
+import HabitList from './components/habit_list'
 
 if (!firebase.apps.length) {
   firebase.initializeApp({
@@ -28,11 +28,6 @@ if (!firebase.apps.length) {
 
 const auth = firebase.auth();
 const firestore = firebase.firestore();
-
-firebase.firestore().collection('testing').add({
-  title: 'test',
-  score: 2323
-})
 
 
 function App() {
@@ -52,16 +47,16 @@ function App() {
   )
 }
 
-function SignIn() {
-  const signInWithGoogle = () => {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    auth.signInWithPopup(provider);
-  }
+// function SignIn() {
+//   const signInWithGoogle = () => {
+//     const provider = new firebase.auth.GoogleAuthProvider();
+//     auth.signInWithPopup(provider);
+//   }
 
-  return (
-    <button onClick={signInWithGoogle}>Sign in with Google</button>
-  )
-}
+//   return (
+//     <button onClick={signInWithGoogle}>Sign in with Google</button>
+//   )
+// }
 
 function TwitterSignIn() {
   // Using a popup.
@@ -93,18 +88,6 @@ function TwitterSignIn() {
 function SingOut() {
   return auth.currentUser && (
     <button onClick={() => auth.signOut()}>Sign Out</button>
-  )
-}
-
-const HabitList = () => {
-  const firestore = firebase.firestore();
-  const habitsRef = firestore.collection('habits');
-  const [habits] = useCollectionData(habitsRef, { idField: 'id' });
-  console.log(habits);
-  return (
-    <div className='habit-list'>
-       {/*{#habits.map(habit => <Habit content={habit} key={habit} />)}*/}
-    </div>
   )
 }
 

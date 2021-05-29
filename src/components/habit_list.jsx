@@ -13,7 +13,7 @@ const HabitList = () => {
   console.log(habits);
   return (
     <div className='habit-list'>
-       {habits.map(habit => <Habit habit={habit} key={habit.id} />)}
+       {habits && habits.map(habit => <Habit habit={habit} key={habit.id} />)}
     </div>
   )
 }
