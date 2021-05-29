@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 import Habit from './habit'
 import AddHabit from './add_habit'
@@ -9,9 +9,9 @@ import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 const HabitList = () => {
   const firestore = firebase.firestore();
-  const habitsRef = firestore.collection('habits');
-  const [habits] = useCollectionData(habitsRef.orderBy('createdAt'), { idField: 'id' });
-  const [input, setInput] = useState('');
+  const habitsRef = firestore.collection('habits'); // this is the colletion in the firestore
+  const [habits] = useCollectionData(habitsRef.orderBy('createdAt'), { idField: 'id' }); // attach with unique id and so on
+  const [input, setInput] = useState(''); // for the form
 
   const addHabit = async (e) => {
     e.preventDefault();
@@ -26,9 +26,15 @@ const HabitList = () => {
     setInput('');
   }
 
+  const deleteHabit = (habit) => {
+    habitsRef.where("content", "==", habit.content).get().then(querySnapshot => {
+      querySnapshot.docs[0].ref.delete();
+    });
+  }
+
   return (
     <div className='habit-list'>
-      {habits && habits.map(habit => <Habit habit={habit} key={habit.id} />)}
+      {habits && habits.map(habit => <Habit habit={habit} key={habit.id} deleteHabit={deleteHabit}/>)}
       <form onSubmit={addHabit}>
           <input type="text" value={input} onChange={e => setInput(e.currentTarget.value)} />
           <button type="submit" className="btn btn-primary">Submit</button>

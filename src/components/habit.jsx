@@ -1,4 +1,6 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 
 const Habit = (props) => {
   const [habitCompletion, setHabitCompletion] = useState(false);
@@ -11,6 +13,7 @@ const Habit = (props) => {
           <label for={props.habit.id}></label>
         </div>
         <h2>{ props.habit.content }</h2>
+        <FontAwesomeIcon icon={faTrashAlt} onClick={() => props.deleteHabit(props.habit)}/>
       </div>
     </div>
   )
