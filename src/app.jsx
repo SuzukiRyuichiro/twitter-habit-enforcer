@@ -34,7 +34,7 @@ function App() {
   const [user] = useAuthState(firebase.auth());
 
   return (
-    <div className="App">
+    <div className="App container">
         <header>
           <SingOut />
           <h3>13:30</h3>
@@ -42,7 +42,6 @@ function App() {
         <section>
           {user ? <HabitList /> : <TwitterSignIn />}
         </section>
-        <h3>{ user ? user.uid : '' }</h3>
       </div>
   )
 }

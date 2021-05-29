@@ -38,19 +38,23 @@
 }
 
 .habit-card {
-  width: 80%;
+  display: grid;
   height: 70px;
   background-color: #091952;
-  margin: 0px 0px 30px 0px;
-  border-radius: 10px;
+  margin-bottom:  24px;
+  border-radius: 24px;
+  align-items:  center;
+  grid-template-columns: 64px 1fr 10%;
+  color:  #eeddff;
 }
 
-.habit-description {
-  color:  #ffffff;
+.habit-content {
+  text-align: start;
 }
 
 .round {
   position: relative;
+  margin-left: 16px;
 }
 
 .round label {
