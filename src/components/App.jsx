@@ -11,7 +11,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 // components
-import HabitList from './habit_list'
+// import HabitList from './habit_list'
 
 if (!firebase.apps.length) {
   firebase.initializeApp({
@@ -29,9 +29,15 @@ if (!firebase.apps.length) {
 const auth = firebase.auth();
 const firestore = firebase.firestore();
 
+firebase.firestore().collection('testing').add({
+  title: 'test',
+  score: 2323
+})
+
 
 function App() {
   const [user] = useAuthState(firebase.auth());
+
   return (
     <div className="App">
         <header>
@@ -39,7 +45,7 @@ function App() {
           <h3>13:30</h3>
         </header>
         <section>
-          {user ? <HabitList habits={['test', 'test2', 'teste3']}/> : <TwitterSignIn />}
+          {user ? <HabitList /> : <TwitterSignIn />}
         </section>
         <h3>{ user ? user.uid : '' }</h3>
       </div>
@@ -90,5 +96,16 @@ function SingOut() {
   )
 }
 
+const HabitList = () => {
+  const firestore = firebase.firestore();
+  const habitsRef = firestore.collection('habits');
+  const [habits] = useCollectionData(habitsRef, { idField: 'id' });
+  console.log(habits);
+  return (
+    <div className='habit-list'>
+       {/*{#habits.map(habit => <Habit content={habit} key={habit} />)}*/}
+    </div>
+  )
+}
 
 export default App;

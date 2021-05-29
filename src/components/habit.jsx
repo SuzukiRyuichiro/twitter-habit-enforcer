@@ -1,26 +1,15 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-export default class Habit extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      habitCompletion: false
-    };
-  }
+const Habit = () => {
+  const [habitCompletion, setHabitCompletion] = useState(false);
 
-  handleClick = () => {
-    console.log('hey');
-  }
-
-  render() {
-    return (
-      <div className="habit-card">
-        <div className="checkbox" onClick={this.handleClick}>
-        </div>
-        <div className="habit-description">
-          <h2>{ this.props.content }</h2>
-        </div>
+  return (
+    <div className="habit-card">
+      <div className="checkbox" onClick={() => setHabitCompletion(!habitCompletion)}>
       </div>
-    )
-  }
+      <div className="habit-description">
+        <h2>{ this.props.habit.content }</h2>
+      </div>
+    </div>
+  )
 }

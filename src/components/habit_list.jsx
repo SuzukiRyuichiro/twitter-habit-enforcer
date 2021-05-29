@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
 
 import Habit from './habit'
-import AddHabit from './add_habit'
 
-export default class HabitList extends Component {
-  render() {
-    return (
-      <div className='habit-list'>
-        {this.props.habits.map(habit => <Habit content={habit} key={habit} />)}
-        <AddHabit />
-      </div>
-    )
-  }
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
+
+const HabitList = () => {
+  const firestore = firebase.firestore();
+  const habitsRef = firestore.collection('habits');
+  const [habits] = useCollectionData(habitsRef, { idField: 'id' });
+  console.log(habits);
+  return (
+    <div className='habit-list'>
+       {habits.map(habit => <Habit habit={habit} key={habit.id} />)}
+    </div>
+  )
 }
+
+export default HabitList;
