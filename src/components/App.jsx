@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
+// import React, { Component } from 'react';
 import '../App.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 
 // firebase
 import firebase from 'firebase/app';
@@ -37,15 +39,12 @@ function App() {
           <h3>13:30</h3>
         </header>
         <section>
-          {user ? <HabitList /> : <TwitterSignIn />}
+          {user ? <HabitList habits={['test', 'test2', 'teste3']}/> : <TwitterSignIn />}
         </section>
         <h3>{ user ? user.uid : '' }</h3>
       </div>
   )
 }
-
-
-
 
 function SignIn() {
   const signInWithGoogle = () => {
@@ -68,7 +67,16 @@ function TwitterSignIn() {
       var secret = result.credential.secret;
       // The signed-in user info.
       var user = result.user;
-    })
+    }).catch((error) => {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // The email of the user's account used.
+    var email = error.email;
+    // The firebase.auth.AuthCredential type that was used.
+    var credential = error.credential;
+    // ...
+  });
   }
 
   return (

@@ -16,9 +16,10 @@ export default class Habit extends Component {
     return (
       <div className="habit-card">
         <div className="checkbox" onClick={this.handleClick}>
-
         </div>
-        <div className="habit-description"></div>
+        <div className="habit-description">
+          <h2>{ this.props.content }</h2>
+        </div>
       </div>
     )
   }
