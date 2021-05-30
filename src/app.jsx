@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCoffee } from "@fortawesome/free-solid-svg-icons";
+import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 
 // firebase
 import firebase from "firebase/app";
@@ -13,6 +13,7 @@ import { useCollectionData } from "react-firebase-hooks/firestore";
 // components
 import HabitList from "./components/habit_list";
 import Clock from "./components/clock";
+import SideNav from "./components/side_nav";
 
 if (!firebase.apps.length) {
   firebase.initializeApp({
@@ -33,27 +34,22 @@ const firestore = firebase.firestore();
 function App() {
   const [user] = useAuthState(firebase.auth());
 
+  const openNav = () => {
+    document.querySelector("#mySidenav").classList.add("nav-open")
+  }
+
   return (
-    <div className="App container">
-      <SingOut />
-      <header>
-        <Clock />
-      </header>
-      <section>{user ? <HabitList /> : <TwitterSignIn />}</section>
-    </div>
+      <div className="App container">
+        <FontAwesomeIcon icon={faSignOutAlt} onClick={() => openNav()} className="open-nav" />
+        <SideNav />
+        {/*<SingOut />*/}
+        <header>
+          <Clock />
+        </header>
+        <section>{user ? <HabitList /> : <TwitterSignIn />}</section>
+      </div>
   );
 }
-
-// function SignIn() {
-//   const signInWithGoogle = () => {
-//     const provider = new firebase.auth.GoogleAuthProvider();
-//     auth.signInWithPopup(provider);
-//   }
-
-//   return (
-//     <button onClick={signInWithGoogle}>Sign in with Google</button>
-//   )
-// }
 
 function TwitterSignIn() {
   // Using a popup.
@@ -82,7 +78,7 @@ function TwitterSignIn() {
   };
 
   return (
-    <button onClick={signInWithTwitter} className="btn btn-primary">
+    <button onClick={signInWithTwitter} className="btn btn-light">
       Sign in with Twitter
     </button>
   );
@@ -93,7 +89,7 @@ function SingOut() {
     auth.currentUser && (
       <button
         onClick={() => auth.signOut()}
-        className="sign-out btn btn-primary"
+        className="sign-out btn btn-success"
       >
         Sign Out
       </button>
