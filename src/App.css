@@ -46,6 +46,7 @@
   align-items:  center;
   grid-template-columns: 64px 1fr 10%;
   color:  #eeddff;
+  box-shadow: 2px 2px 8px #00000060;
 }
 
 .habit-content {
@@ -62,8 +63,8 @@
 }
 
 .round label {
-  background-color: #fff;
-  border: 1px solid #ccc;
+  background-color: #ffffff00;
+  border: 1px solid #8A00B4;
   border-radius: 50%;
   cursor: pointer;
   height: 28px;
@@ -92,10 +93,22 @@
 }
 
 .round input[type="checkbox"]:checked + label {
-  background-color: #66bb6a;
-  border-color: #66bb6a;
+  background-color: #132375;
+  border-color: #132375;
 }
 
 .round input[type="checkbox"]:checked + label:after {
   opacity: 1;
+}
+
+.sign-out {
+  position:  absolute;
+  left:  10px;
+  top:  10px;
+}
+
+#clock {
+  padding: 50px;
+  color: #61dafb;
+  font-size:  2.5rem;
 }

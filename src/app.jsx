@@ -36,8 +36,8 @@ function App() {
 
   return (
     <div className="App container">
+        <SingOut />
         <header>
-          <SingOut />
           <Clock />
         </header>
         <section>
@@ -81,13 +81,13 @@ function TwitterSignIn() {
   }
 
   return (
-    <button onClick={signInWithTwitter}>Sign in with Twitter</button>
+    <button onClick={signInWithTwitter} className="btn btn-primary">Sign in with Twitter</button>
   )
 }
 
 function SingOut() {
   return auth.currentUser && (
-    <button onClick={() => auth.signOut()}>Sign Out</button>
+    <button onClick={() => auth.signOut()} className="sign-out btn btn-primary">Sign Out</button>
   )
 }
 

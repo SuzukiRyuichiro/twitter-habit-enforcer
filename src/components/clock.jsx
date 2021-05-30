@@ -12,22 +12,14 @@ export default class Clock extends Component{
   }
   componentDidMount() {
     setInterval(()=>{
-      if(this.state.one === true) {
-        this.setState({
-          time: moment().format('LTS')
-        })
-      }
-      else if(this.state.four === true){
-        this.setState({
-          time: moment().format('LT')
-        })
-      }
-    },1000)
+        this.setState({ time: moment().format('LTS') })}
+      ,1000)
   }
+
   render() {
     return(
-      <div id="clock" style={this.state.background} onClick={this.clicked}>
-        <h1 className={this.state.class}>{this.state.time}</h1>
+      <div id="clock" className={this.state.class}>
+        {this.state.time}
       </div>
     )
   }
