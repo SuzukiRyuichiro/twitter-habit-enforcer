@@ -13,7 +13,6 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 const HabitList = () => {
   const firestore = firebase.firestore();
   const habitsRef = firestore.collection("habits"); // this is the colletion in the firestore
-  console.log(habitsRef.where("uid", "==", firebase.auth().currentUser.uid));
   const [habits] = useCollectionData(
     habitsRef.where("uid", "==", firebase.auth().currentUser.uid),
     { idField: "id" }

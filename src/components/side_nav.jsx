@@ -1,8 +1,6 @@
 import React from 'react';
 import firebase from "firebase/app";
 
-const auth = firebase.auth();
-
 const closeNav = () => {
   document.querySelector("#mySidenav").classList.remove("nav-open")
 }
@@ -21,12 +19,12 @@ const SideNav = () => {
 
 function SingOut() {
   const signOutAndClose = () => {
-    auth.signOut();
+    firebase.auth().signOut();
     closeNav();
   }
 
   return (
-    auth.currentUser && (
+    firebase.auth().currentUser && (
       <span className="sidenav-item" onClick={() => signOutAndClose()}>
         Sign Out
       </span>

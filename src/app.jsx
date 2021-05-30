@@ -15,6 +15,7 @@ import HabitList from "./components/habit_list";
 import Clock from "./components/clock";
 import SideNav from "./components/side_nav";
 
+
 if (!firebase.apps.length) {
   firebase.initializeApp({
     // my configuration
@@ -40,7 +41,7 @@ function App() {
 
   return (
       <div className="App container">
-        <FontAwesomeIcon icon={faSignOutAlt} onClick={() => openNav()} className="open-nav" />
+        { user ? <FontAwesomeIcon icon={faSignOutAlt} onClick={() => openNav()} className="open-nav" /> : null }
         <SideNav />
         {/*<SingOut />*/}
         <header>
