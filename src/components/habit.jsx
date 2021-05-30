@@ -10,7 +10,7 @@ const Habit = (props) => {
     <div className="habit-card">
         <div className="round">
           <input type="checkbox" id={props.habit.id} onClick={() => setHabitCompletion(!habitCompletion)}/>
-          <label for={props.habit.id}></label>
+          <label htmlFor={props.habit.id}></label>
         </div>
         <h2 className={`habit-content ${habitContent}`}>{ props.habit.content }</h2>
         <FontAwesomeIcon icon={faTrashAlt} onClick={() => props.deleteHabit(props.habit)}/>

@@ -10,13 +10,15 @@ import { useCollectionData } from 'react-firebase-hooks/firestore';
 const HabitList = () => {
   const firestore = firebase.firestore();
   const habitsRef = firestore.collection('habits'); // this is the colletion in the firestore
-  const [habits] = useCollectionData(habitsRef.orderBy('createdAt'), { idField: 'id' }); // attach with unique id and so on
+  console.log(habitsRef.where("uid", "==", firebase.auth().currentUser.uid));
+  const [habits] = useCollectionData(habitsRef.where("uid", "==", firebase.auth().currentUser.uid), { idField: 'id' }); // attach with unique id and so on
   const [input, setInput] = useState(''); // for the form
 
   const addHabit = async (e) => {
     e.preventDefault();
 
     const { uid } = firebase.auth().currentUser;
+
     await habitsRef.add({
       content: input,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),

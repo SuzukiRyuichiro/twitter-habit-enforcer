@@ -12,12 +12,12 @@ export default class Clock extends Component{
   }
   componentDidMount() {
     setInterval(()=>{
-      if(this.state.one == true) {
+      if(this.state.one === true) {
         this.setState({
           time: moment().format('LTS')
         })
       }
-      else if(this.state.four == true){
+      else if(this.state.four === true){
         this.setState({
           time: moment().format('LT')
         })
