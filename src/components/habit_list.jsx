@@ -13,11 +13,19 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 const HabitList = () => {
   const firestore = firebase.firestore();
   const habitsRef = firestore.collection("habits"); // this is the colletion in the firestore
-  const [habits] = useCollectionData(
-    habitsRef.where("uid", "==", firebase.auth().currentUser.uid),
+  const [habits, loading, error] = useCollectionData(
+    habitsRef.where("uid", "==", firebase.auth().currentUser.uid).orderBy('complete','desc'),
     { idField: "id" }
   ); // attach with unique id and so on
-  const [input, setInput] = useState(""); // for the form
+
+  if (loading) {
+      console.log('loading');
+    }
+    if (error) {
+      console.log(error.message);
+    }
+
+    const [input, setInput] = useState(""); // for the form
 
   // function to add Habit on click
   const addHabit = async (e) => {
