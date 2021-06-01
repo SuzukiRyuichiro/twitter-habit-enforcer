@@ -1,5 +1,9 @@
 .App {
   text-align: center;
+  height: 100vh;
+  display:  grid;
+  gap: 20px;
+  grid-template-rows: 150px minmax(0, calc(100vh - 270px)) 40px;
 }
 
 .App-logo {
@@ -127,7 +131,6 @@
     border: none;
     font-size: 24px;
     box-shadow: none;
-    /*box-shadow: 2px 2px 8px #00000060;*/
 }
 
 .search-form-control {
@@ -150,11 +153,6 @@
 
 .habit-list {
   overflow-y: scroll;
-}
-
-.habit-main {
-  display: grid;
-  grid-template-rows: 70vh 1fr;
 }
 
 .open-nav {
@@ -182,7 +180,7 @@
 
 .sidenav-swipe {
   height: 100%; /* 100% Full-height */
-  width: 70px;  /*0 width - change this with JavaScript */
+  width: 15%;  /*0 width - change this with JavaScript */
   position: fixed; /* Stay in place */
   z-index: 1; /* Stay on top */
   top: 0; /* Stay at the top */

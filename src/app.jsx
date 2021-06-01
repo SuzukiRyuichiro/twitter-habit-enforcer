@@ -15,6 +15,7 @@ import HabitList from "./components/habit_list";
 import Clock from "./components/clock";
 import SideNav from "./components/side_nav";
 import SideNavSwipe from "./components/side_nav_swipe";
+import AddHabit from "./components/add_habit";
 
 if (!firebase.apps.length) {
   firebase.initializeApp({
@@ -31,7 +32,7 @@ if (!firebase.apps.length) {
 
 const auth = firebase.auth();
 
-function App() {
+const App = () => {
   const [user] = useAuthState(firebase.auth());
 
   // function that opens the side nav
@@ -60,10 +61,12 @@ function App() {
       <header>
         <Clock />
       </header>
-      <section>{user ? <HabitList /> : <TwitterSignIn />}</section>
+      {user ? <HabitList /> : <TwitterSignIn />}
+      {user ? <AddHabit /> : null }
     </div>
   );
 }
+
 
 function TwitterSignIn() {
   // Using a popup.
