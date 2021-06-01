@@ -203,10 +203,10 @@
 
 .sidenav-item {
   color: #eeddff;
-  font-size: 20px;
+  font-size: 24px;
   overflow-x: hidden;
   z-index: 4;
-  display: block;
+  white-space: nowrap;
 }
 
 .sidenav-item:hover {
