@@ -95,7 +95,7 @@ function TwitterSignIn() {
   };
 
   return (
-    <button onClick={signInWithTwitter} className="btn btn-light">
+    <button onClick={signInWithTwitter} className="sign-in-with-twitter">
       Sign in with Twitter
     </button>
   );

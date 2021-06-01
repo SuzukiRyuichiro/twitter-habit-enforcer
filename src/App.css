@@ -1,7 +1,7 @@
 .App {
   text-align: center;
   height: 100vh;
-  display:  grid;
+  display: grid;
   gap: 20px;
   grid-template-rows: 150px minmax(0, calc(100vh - 270px)) 40px;
 }
@@ -41,17 +41,26 @@
   }
 }
 
+.sign-in-with-twitter {
+  background-color: #00aced;
+  height: 70px;
+  color: #eeeeee;
+  font-size: 1.5rem;
+  border-radius: 24px;
+  box-shadow: 2px 2px 8px #00000060;
+}
+
 .habit-card {
   z-index: 1;
   display: grid;
   height: 70px;
   background-color: #091952;
-  margin-bottom:  24px;
+  margin-bottom: 24px;
   border-radius: 24px;
-  align-items:  center;
+  align-items: center;
   grid-template-columns: 40px 1fr 10%;
   gap: 15px;
-  color:  #eeddff;
+  color: #eeddff;
   box-shadow: 2px 2px 8px #00000060;
 }
 
@@ -76,7 +85,7 @@
 .round label {
   z-index: 1;
   background-color: #ffffff00;
-  border: 1px solid #8A00B4;
+  border: 1px solid #8a00b4;
   border-radius: 50%;
   cursor: pointer;
   height: 28px;
@@ -114,23 +123,23 @@
 }
 
 .sign-out {
-  position:  absolute;
-  left:  10px;
-  top:  10px;
+  position: absolute;
+  left: 10px;
+  top: 10px;
 }
 
 #clock {
   padding: 50px;
   color: #61dafb;
-  font-size:  2.5rem;
+  font-size: 2.5rem;
 }
 
 .habit-form {
-    border-radius:  24px;
-    padding: 20px 20px 20px 20px;
-    border: none;
-    font-size: 24px;
-    box-shadow: none;
+  border-radius: 24px;
+  padding: 20px 20px 20px 20px;
+  border: none;
+  font-size: 24px;
+  box-shadow: none;
 }
 
 .search-form-control {
@@ -145,10 +154,10 @@
 }
 
 .search-form-control .form-control {
-  border-radius:  24px;
+  border-radius: 24px;
   height: 3.5rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  border: 1px solid #E7E7E7;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e7e7e7;
 }
 
 .habit-list {
@@ -156,7 +165,7 @@
 }
 
 .open-nav {
-  font-size:  30px;
+  font-size: 30px;
   position: absolute;
   top: 10px;
   left: 10px;
@@ -167,7 +176,7 @@
 /* The side navigation menu */
 .sidenav {
   height: 100%; /* 100% Full-height */
-  width: 0;  /*0 width - change this with JavaScript */
+  width: 0; /*0 width - change this with JavaScript */
   position: fixed; /* Stay in place */
   z-index: 2; /* Stay on top */
   top: 0; /* Stay at the top */
@@ -180,7 +189,7 @@
 
 .sidenav-swipe {
   height: 100%; /* 100% Full-height */
-  width: 15%;  /*0 width - change this with JavaScript */
+  width: 15%; /*0 width - change this with JavaScript */
   position: fixed; /* Stay in place */
   z-index: 1; /* Stay on top */
   top: 0; /* Stay at the top */
@@ -190,7 +199,7 @@
 }
 
 .nav-open {
-  width:  50%;
+  width: 50%;
 }
 
 /* The navigation menu links */
@@ -203,12 +212,10 @@
   transition: 0.3s;
 }
 
-
 /* When you mouse over the navigation links, change their color */
 .sidenav a:hover {
   color: #f1f1f1;
 }
-
 
 /* Position and style the close button (top right corner) */
 .sidenav .closebtn {
@@ -228,17 +235,21 @@
 }
 
 .sidenav-item:hover {
-    color: #ccaaee;
+  color: #ccaaee;
 }
 
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 #main {
-  transition: margin-left .5s;
+  transition: margin-left 0.5s;
   padding: 20px;
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
+  .sidenav {
+    padding-top: 15px;
+  }
+  .sidenav a {
+    font-size: 18px;
+  }
 }

@@ -17,7 +17,7 @@ const SideNav = (props) => {
   return (
     <div {...handlers} id="mySidenav" className="sidenav">
       <a href="javascript:void(0)" className="closebtn" onClick={() => props.closeNav()}>&times;</a>
-      <SingOut />
+      <SingOut closeNav={props.closeNav}/>
     </div>
   )
 };
