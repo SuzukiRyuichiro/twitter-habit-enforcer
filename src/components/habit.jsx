@@ -13,6 +13,7 @@ const Habit = (props) => {
   // function that set the state for the front end but also save the state to the firestore
   const saveCompletionState = () => {
     setHabitCompletion(!habitCompletion); // change the state in the React world
+    // console.log(document.querySelector(`#${props.habit.id}`));
     habitsRef.doc(props.habit.id).update({ complete: !habitCompletion });
   }
 
@@ -22,6 +23,7 @@ const Habit = (props) => {
         <input
           type="checkbox"
           id={props.habit.id}
+          defaultChecked={props.habit.complete}
           onClick={() => saveCompletionState()}
         />
         <label htmlFor={props.habit.id}></label>
