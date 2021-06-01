@@ -19,6 +19,7 @@ const HabitList = () => {
   ); // attach with unique id and so on
   const [input, setInput] = useState(""); // for the form
 
+  // function to add Habit on click
   const addHabit = async (e) => {
     e.preventDefault();
 
@@ -33,6 +34,7 @@ const HabitList = () => {
     setInput("");
   };
 
+  // function to delete Habit on click
   const deleteHabit = (habit) => {
     habitsRef
       .where("content", "==", habit.content)
@@ -42,6 +44,7 @@ const HabitList = () => {
       });
   };
 
+ // Actual component that'll be rendered
   return (
     <div className="habit-main">
       <div className="habit-list">

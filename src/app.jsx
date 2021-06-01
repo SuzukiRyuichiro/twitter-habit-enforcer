@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { useSwipeable } from "react-swipeable";
 
 // firebase
 import firebase from "firebase/app";
@@ -14,7 +15,6 @@ import { useCollectionData } from "react-firebase-hooks/firestore";
 import HabitList from "./components/habit_list";
 import Clock from "./components/clock";
 import SideNav from "./components/side_nav";
-
 
 if (!firebase.apps.length) {
   firebase.initializeApp({
@@ -35,20 +35,40 @@ const firestore = firebase.firestore();
 function App() {
   const [user] = useAuthState(firebase.auth());
 
+  // function that opens the side nav
   const openNav = () => {
-    document.querySelector("#mySidenav").classList.add("nav-open")
-  }
+    document.querySelector("#mySidenav").classList.add("nav-open");
+  };
 
+  // function that close the side nav
+  const closeNav = () => {
+    document.querySelector("#mySidenav").classList.remove("nav-open");
+  };
+
+  const handlers = useSwipeable({
+    onSwipedLeft: () => closeNav(),
+    onSwipedRight: () => openNav(),
+    preventDefaultTouchmoveEvent: true,
+    trackMouse: true,
+  });
+
+  // actual component
   return (
-      <div className="App container">
-        { user ? <FontAwesomeIcon icon={faSignOutAlt} onClick={() => openNav()} className="open-nav" /> : null }
-        <SideNav />
-        {/*<SingOut />*/}
-        <header>
-          <Clock />
-        </header>
-        <section>{user ? <HabitList /> : <TwitterSignIn />}</section>
-      </div>
+    <div {...handlers} className="App container">
+      {user ? (
+        <FontAwesomeIcon
+          icon={faSignOutAlt}
+          onClick={() => openNav()}
+          className="open-nav"
+        />
+      ) : null}
+      <SideNav />
+      {/*<SingOut />*/}
+      <header>
+        <Clock />
+      </header>
+      <section>{user ? <HabitList /> : <TwitterSignIn />}</section>
+    </div>
   );
 }
 
