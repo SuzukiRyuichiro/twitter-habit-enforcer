@@ -9,7 +9,6 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useCollectionData } from "react-firebase-hooks/firestore";
 
 // components
 import HabitList from "./components/habit_list";
@@ -30,7 +29,6 @@ if (!firebase.apps.length) {
 }
 
 const auth = firebase.auth();
-const firestore = firebase.firestore();
 
 function App() {
   const [user] = useAuthState(firebase.auth());
@@ -50,6 +48,7 @@ function App() {
     onSwipedRight: () => openNav(),
     preventDefaultTouchmoveEvent: true,
     trackMouse: true,
+    delta: 30,
   });
 
   // actual component
@@ -63,7 +62,6 @@ function App() {
         />
       ) : null}
       <SideNav />
-      {/*<SingOut />*/}
       <header>
         <Clock />
       </header>
@@ -105,17 +103,5 @@ function TwitterSignIn() {
   );
 }
 
-function SingOut() {
-  return (
-    auth.currentUser && (
-      <button
-        onClick={() => auth.signOut()}
-        className="sign-out btn btn-success"
-      >
-        Sign Out
-      </button>
-    )
-  );
-}
 
 export default App;
