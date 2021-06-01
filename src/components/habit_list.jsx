@@ -38,14 +38,17 @@ const HabitList = () => {
   // function to delete Habit on click
   const deleteHabit = (habit) => {
     habitsRef
-      .where("content", "==", habit.content)
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.docs[0].ref.delete();
+      .doc(habit.id)
+      .delete()
+      .then(() => {
+        console.log("Document successfully deleted!");
+      })
+      .catch((error) => {
+        console.error("Error removing document: ", error);
       });
   };
 
- // Actual component that'll be rendered
+  // Actual component that'll be rendered
   return (
     <div className="habit-main">
       <div className="habit-list">
