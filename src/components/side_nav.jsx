@@ -1,36 +1,25 @@
 import React from 'react';
 import firebase from "firebase/app";
+import SingOut from './sign_out'
+import { useSwipeable } from "react-swipeable";
 
-const closeNav = () => {
-  document.querySelector("#mySidenav").classList.remove("nav-open")
-}
+const SideNav = (props) => {
 
-const SideNav = () => {
+  const handlers = useSwipeable({
+    onSwipedLeft: () => props.closeNav(),
+    preventDefaultTouchmoveEvent: true,
+    trackMouse: true,
+    delta: 10,
+  });
 
   //  Set the width of the side navigation to 0
 
   return (
-    <div id="mySidenav" className="sidenav">
-      <a href="javascript:void(0)" className="closebtn" onClick={() => closeNav()}>&times;</a>
+    <div {...handlers} id="mySidenav" className="sidenav">
+      <a href="javascript:void(0)" className="closebtn" onClick={() => props.closeNav()}>&times;</a>
       <SingOut />
     </div>
   )
 };
-
-function SingOut() {
-  const signOutAndClose = () => {
-    firebase.auth().signOut();
-    closeNav();
-  }
-
-  return (
-    firebase.auth().currentUser && (
-      <span className="sidenav-item" onClick={() => signOutAndClose()}>
-        Sign Out
-      </span>
-    )
-  );
-}
-
 
 export default SideNav;

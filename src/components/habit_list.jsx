@@ -14,7 +14,7 @@ const HabitList = () => {
   const firestore = firebase.firestore();
   const habitsRef = firestore.collection("habits"); // this is the colletion in the firestore
   const [habits, loading, error] = useCollectionData(
-    habitsRef.where("uid", "==", firebase.auth().currentUser.uid).orderBy('complete','desc'),
+    habitsRef.where("uid", "==", firebase.auth().currentUser.uid),
     { idField: "id" }
   ); // attach with unique id and so on
 

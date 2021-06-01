@@ -14,6 +14,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import HabitList from "./components/habit_list";
 import Clock from "./components/clock";
 import SideNav from "./components/side_nav";
+import SideNavSwipe from "./components/side_nav_swipe";
 
 if (!firebase.apps.length) {
   firebase.initializeApp({
@@ -43,17 +44,10 @@ function App() {
     document.querySelector("#mySidenav").classList.remove("nav-open");
   };
 
-  const handlers = useSwipeable({
-    onSwipedLeft: () => closeNav(),
-    onSwipedRight: () => openNav(),
-    preventDefaultTouchmoveEvent: true,
-    trackMouse: true,
-    delta: 30,
-  });
 
   // actual component
   return (
-    <div {...handlers} className="App container">
+    <div className="App container">
       {user ? (
         <FontAwesomeIcon
           icon={faSignOutAlt}
@@ -61,7 +55,8 @@ function App() {
           className="open-nav"
         />
       ) : null}
-      <SideNav />
+      <SideNavSwipe openNav={openNav} />
+      <SideNav closeNav={closeNav}/>
       <header>
         <Clock />
       </header>
@@ -102,6 +97,5 @@ function TwitterSignIn() {
     </button>
   );
 }
-
 
 export default App;
