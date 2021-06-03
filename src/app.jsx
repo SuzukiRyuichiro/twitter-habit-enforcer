@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
@@ -16,6 +16,8 @@ import Clock from "./components/clock";
 import SideNav from "./components/side_nav";
 import SideNavSwipe from "./components/side_nav_swipe";
 import AddHabit from "./components/add_habit";
+import TwitterSignIn from "./components/twitter_sign_in";
+import Test from "./components/test";
 
 if (!firebase.apps.length) {
   firebase.initializeApp({
@@ -34,7 +36,8 @@ const auth = firebase.auth();
 
 const App = () => {
   const [user] = useAuthState(firebase.auth());
-
+  const [accessToken, setAccessToken] = useState();
+  const [accessTokenSecret, setAccessTokenScret] = useState();
   // function that opens the side nav
   const openNav = () => {
     document.querySelector("#mySidenav").classList.add("nav-open");
@@ -58,46 +61,13 @@ const App = () => {
       ) : null}
       <SideNavSwipe openNav={openNav} />
       <SideNav closeNav={closeNav}/>
+      <Test accessToken={accessToken} accessTokenSecret={accessTokenSecret} />
       <header>
         <Clock />
       </header>
-      {user ? <HabitList /> : <TwitterSignIn />}
+      {user ? <HabitList /> : <TwitterSignIn setAccessToken={setAccessToken} setAccessTokenScret={setAccessTokenScret} />}
       {user ? <AddHabit /> : null }
     </div>
-  );
-}
-
-
-function TwitterSignIn() {
-  // Using a popup.
-  const signInWithTwitter = () => {
-    var provider = new firebase.auth.TwitterAuthProvider();
-    firebase
-      .auth()
-      .signInWithPopup(provider)
-      .then(function (result) {
-        // For accessing the Twitter API.
-        var token = result.credential.accessToken;
-        var secret = result.credential.secret;
-        // The signed-in user info.
-        var user = result.user;
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // The email of the user's account used.
-        var email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
-        var credential = error.credential;
-        // ...
-      });
-  };
-
-  return (
-    <button onClick={signInWithTwitter} className="sign-in-with-twitter">
-      Sign in with Twitter
-    </button>
   );
 }
 
