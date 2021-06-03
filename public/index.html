@@ -24,9 +24,19 @@
     work correctly both with client-side routing and a non-root public URL.
     Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <link rel="icons" type="image/png" sizes="192x192"  href="%PUBLIC_URL%/icons/manifest-icon-192.png">
+    <title>Twitter Habit Enforcer</title>
   </head>
   <body>
     <div id="root"></div>
+    <script>
+    // Check that service workers are supported
+    if ('serviceWorker' in navigator) {
+      // Use the window load event to keep the page load performant
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js');
+      });
+    }
+    </script>
   </body>
 </html>

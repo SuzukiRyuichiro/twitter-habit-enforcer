@@ -1,5 +1,4 @@
 import React from 'react';
-import firebase from "firebase/app";
 import SingOut from './sign_out'
 import { useSwipeable } from "react-swipeable";
 
@@ -16,7 +15,7 @@ const SideNav = (props) => {
 
   return (
     <div {...handlers} id="mySidenav" className="sidenav">
-      <a href="javascript:void(0)" className="closebtn" onClick={() => props.closeNav()}>&times;</a>
+      <a className="closebtn" onClick={() => props.closeNav()}>&times;</a>
       <SingOut closeNav={props.closeNav}/>
     </div>
   )

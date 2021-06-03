@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-
 import Habit from "./habit";
 
 import firebase from "firebase/app";
@@ -23,23 +21,6 @@ const HabitList = () => {
     console.log(error.message);
   }
 
-  const [input, setInput] = useState(""); // for the form
-
-  // function to add Habit on click
-  const addHabit = async (e) => {
-    e.preventDefault();
-
-    const { uid } = firebase.auth().currentUser;
-
-    await habitsRef.add({
-      content: input,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-      complete: false,
-      uid,
-    });
-
-    setInput("");
-  };
 
   // function to delete Habit on click
   const deleteHabit = (habit) => {

@@ -1,5 +1,4 @@
 import React from 'react';
-import firebase from "firebase/app";
 import { useSwipeable } from "react-swipeable";
 
 
