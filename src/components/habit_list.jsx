@@ -1,15 +1,13 @@
 import Habit from "./habit";
-
-import firebase from "firebase/app";
-import "firebase/firestore";
+import { app } from '../base';
 import { useCollectionData } from "react-firebase-hooks/firestore";
 
 const HabitList = () => {
-  const firestore = firebase.firestore();
+  const firestore = app.firestore();
   const habitsRef = firestore.collection("habits"); // this is the colletion in the firestore
   const [habits, loading, error] = useCollectionData(
     habitsRef
-      .where("uid", "==", firebase.auth().currentUser.uid)
+      .where("uid", "==", app.auth().currentUser.uid)
       .orderBy("createdAt"),
     { idField: "id" }
   ); // attach with unique id and so on

@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
-import { app } from './base'
+import { app, firebase } from './base'
 // firebase
 import "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -53,8 +53,8 @@ const App = () => {
 function TwitterSignIn() {
   // Using a popup.
   const signInWithTwitter = () => {
-    var provider = new app.auth.TwitterAuthProvider();
-    app
+    var provider = new firebase.auth.TwitterAuthProvider();
+    firebase
       .auth()
       .signInWithPopup(provider)
       .then(function (result) {

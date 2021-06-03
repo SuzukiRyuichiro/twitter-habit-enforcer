@@ -1,15 +1,15 @@
 import React from 'react';
-import firebase from "firebase/app";
 import "firebase/auth";
+import { app } from '../base';
 
 const SignOut = (props) => {
   const signOutAndClose = () => {
-    firebase.auth().signOut();
+    app.auth().signOut();
     props.closeNav();
   }
 
   return (
-    firebase.auth().currentUser && (
+    app.auth().currentUser && (
       <span className="sidenav-item" onClick={() => signOutAndClose()}>
         Sign Out
       </span>

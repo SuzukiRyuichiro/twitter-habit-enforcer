@@ -1,22 +1,21 @@
 import React, { useState } from "react";
-import firebase from "firebase/app";
-import "firebase/firestore";
+import { app } from '../base';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 const AddHabit = () => {
   const [input, setInput] = useState("");
-  const firestore = firebase.firestore();
+  const firestore = app.firestore();
   const habitsRef = firestore.collection("habits"); // this is the colletion in the firestore
 
   const addHabit = async (e) => {
     e.preventDefault();
 
-    const { uid } = firebase.auth().currentUser;
+    const { uid } = app.auth().currentUser;
 
     await habitsRef.add({
       content: input,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      createdAt: app.firestore.FieldValue.serverTimestamp(),
       complete: false,
       uid,
     });
@@ -33,8 +32,9 @@ const AddHabit = () => {
             className="form-control string required habit-form"
             value={input}
             onChange={(e) => setInput(e.currentTarget.value)}
+            name="new-habit"
           />
-          <button type="submit" className="habit-submit btn btn-light">
+          <button type="submit" className="habit-submit btn btn-light" aria-label="add">
             <FontAwesomeIcon icon={faPlus} />
           </button>
         </div>

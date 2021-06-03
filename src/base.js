@@ -11,3 +11,5 @@ export const app = firebase.initializeApp({
   appId: "1:1038302881453:web:e5a1ec1937c27cf83fc824",
   measurementId: "G-XWE8ZF1NL6",
 });
+
+export { firebase };
