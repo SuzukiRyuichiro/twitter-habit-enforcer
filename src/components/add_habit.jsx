@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { app } from '../base';
+import { app, firebase, firestore } from '../base';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 const AddHabit = () => {
   const [input, setInput] = useState("");
-  const firestore = app.firestore();
   const habitsRef = firestore.collection("habits"); // this is the colletion in the firestore
 
   const addHabit = async (e) => {
@@ -15,7 +14,7 @@ const AddHabit = () => {
 
     await habitsRef.add({
       content: input,
-      createdAt: app.firestore.FieldValue.serverTimestamp(),
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       complete: false,
       uid,
     });

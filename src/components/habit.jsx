@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
-import { app } from '../base';
+import { app, firestore } from '../base';
 
 const Habit = (props) => {
   const [habitCompletion, setHabitCompletion] = useState(props.habit.complete);
   const habitContent = habitCompletion ? "done text-muted" : "not-done";
-  const firestore = app.firestore();
   const habitsRef = firestore.collection("habits"); // this is the colletion in the firestore
 
   // function that set the state for the front end but also save the state to the firestore
