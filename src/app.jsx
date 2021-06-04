@@ -1,18 +1,18 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import "./App.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { app, firebase } from './base'
 // firebase
 import "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 // components
-import HabitList from "./components/habit_list";
-import Clock from "./components/clock";
-import SideNav from "./components/side_nav";
-import SideNavSwipe from "./components/side_nav_swipe";
-import AddHabit from "./components/add_habit";
+const HabitList = lazy(() => import("./components/habit_list"));
+const Clock = lazy(() => import("./components/clock"));
+const SideNav = lazy(() => import("./components/side_nav"));
+const SideNavSwipe = lazy(() => import("./components/side_nav_swipe"));
+const AddHabit = lazy(() => import("./components/add_habit"));
 
 const App = () => {
   const [user] = useAuthState(app.auth());
@@ -27,17 +27,13 @@ const App = () => {
     document.querySelector("#mySidenav").classList.remove("nav-open");
   };
 
+  const renderLoader = () => <p>Loading</p>;
+
 
   // actual component
   return (
     <div className="App container">
-      {user ? (
-        <FontAwesomeIcon
-          icon={faSignOutAlt}
-          onClick={() => openNav()}
-          className="open-nav"
-        />
-      ) : null}
+    <Suspense fallback={renderLoader()}>
       <SideNavSwipe openNav={openNav} />
       <SideNav closeNav={closeNav}/>
       <header>
@@ -45,19 +41,20 @@ const App = () => {
       </header>
       {user ? <HabitList /> : <TwitterSignIn />}
       {user ? <AddHabit /> : null }
+      </Suspense>
     </div>
   );
 }
 
 
-function TwitterSignIn() {
+const TwitterSignIn = () => {
   // Using a popup.
   const signInWithTwitter = () => {
     var provider = new firebase.auth.TwitterAuthProvider();
     firebase
       .auth()
       .signInWithPopup(provider)
-      .then(function (result) {
+      .then(function(result) {
         // // For accessing the Twitter API.
         // var token = result.credential.accessToken;
         // var secret = result.credential.secret;
