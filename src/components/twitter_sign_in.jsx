@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { app, firebase } from '../base'
-import Twitter from 'twitter-lite';
-
 
 const TwitterSignIn = (props) => {
   // Using a popup.
+
   const signInWithTwitter = () => {
     var provider = new firebase.auth.TwitterAuthProvider();
     firebase
@@ -12,24 +11,27 @@ const TwitterSignIn = (props) => {
       .signInWithPopup(provider)
       .then(function (result) {
         // For accessing the Twitter API.
-        var token = result.credential.accessToken;
-        props.setAccessToken(token);
-        var secret = result.credential.secret;
-        props.setAccessTokenScret(secret);
+        let token = result.credential.accessToken;
+        props.setAccessTokenKey(token);
+        console.log(token);
+        let secret = result.credential.secret;
+        props.setAccessTokenSecret(secret);
+        console.log(secret);
         // The signed-in user info.
-        var user = result.user;
+        let user = result.user;
       })
       .catch((error) => {
         // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
+        let errorCode = error.code;
+        let errorMessage = error.message;
         // The email of the user's account used.
-        var email = error.email;
+        let email = error.email;
         // The firebase.auth.AuthCredential type that was used.
-        var credential = error.credential;
+        let credential = error.credential;
         // ...
       });
   };
+
 
   return (
     <button onClick={signInWithTwitter} className="sign-in-with-twitter">

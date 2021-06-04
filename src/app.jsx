@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useState } from "react";
 import "./App.css";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
@@ -6,7 +6,6 @@ import { app, firebase } from './base'
 // firebase
 import "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
-
 // components
 const HabitList = lazy(() => import("./components/habit_list"));
 const Clock = lazy(() => import("./components/clock"));
@@ -17,6 +16,8 @@ const TwitterSignIn = lazy(() => import('./components/twitter_sign_in'))
 
 const App = () => {
   const [user] = useAuthState(app.auth());
+  const [accessTokenKey, setAccessTokenKey] = useState();
+  const [accessTokenSecret, setAccessTokenSecret] = useState();
 
   // function that opens the side nav
   const openNav = () => {
@@ -30,17 +31,16 @@ const App = () => {
 
   const renderLoader = () => <p>Loading</p>;
 
-
   // actual component
   return (
     <div className="App container">
     <Suspense fallback={renderLoader()}>
-      <SideNavSwipe openNav={openNav} />
+      { user ? <SideNavSwipe openNav={openNav} /> : null }
       <SideNav closeNav={closeNav}/>
       <header>
         <Clock />
       </header>
-      {user ? <HabitList /> : <TwitterSignIn />}
+      {user ? <HabitList /> : <TwitterSignIn setAccessTokenSecret={setAccessTokenSecret} setAccessTokenKey={setAccessTokenKey} />}
       {user ? <AddHabit /> : null }
       </Suspense>
     </div>
