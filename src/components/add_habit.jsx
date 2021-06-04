@@ -17,6 +17,7 @@ const AddHabit = () => {
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       complete: false,
       uid,
+      streak: 0
     });
 
     setInput("");

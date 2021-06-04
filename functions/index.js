@@ -1,8 +1,5 @@
 const functions = require("firebase-functions");
 
-
-
-
 exports.tweetTest = functions.https.onRequest((request, response) => {
   const Twitter = require('twitter-lite');
 
@@ -14,18 +11,12 @@ exports.tweetTest = functions.https.onRequest((request, response) => {
   });
 
 
-  async function tweetThread(thread) {
-    let lastTweetID = "";
-    for (const status of thread) {
+  const tweetUpdate = async (status) => {
       const tweet = await client.post("statuses/update", {
-        status: status,
-        in_reply_to_status_id: lastTweetID,
-        auto_populate_reply_metadata: true
+        status: status
       });
-      lastTweetID = tweet.id_str;
     }
-  }
 
-  const thread = ["First tweet", "Second tweet", "Third tweet"];
-  tweetThread(thread).catch(console.error);
+  // actually run the thing
+  tweetThread(status).catch(console.error);
 })
