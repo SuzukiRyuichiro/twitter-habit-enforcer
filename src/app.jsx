@@ -1,5 +1,5 @@
 import React, { lazy, Suspense, useState } from "react";
-import "./App.css";
+import "./App.scss";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { app, firebase } from './base'
@@ -29,19 +29,33 @@ const App = () => {
     document.querySelector("#mySidenav").classList.remove("nav-open");
   };
 
-  const renderLoader = () => <p>Loading</p>;
+  const renderLoader = () => {
+    return (
+      <section className="loading-wrap">
+        <div className="loading loading04">
+          <span>L</span>
+          <span>O</span>
+          <span>A</span>
+          <span>D</span>
+          <span>I</span>
+          <span>N</span>
+          <span>G</span>
+        </div>
+      </section>
+    )
+  }
 
   // actual component
   return (
     <div className="App container">
-    <Suspense fallback={renderLoader()}>
-      { user ? <SideNavSwipe openNav={openNav} /> : null }
-      <SideNav closeNav={closeNav}/>
-      <header>
-        <Clock />
-      </header>
-      {user ? <HabitList /> : <TwitterSignIn setAccessTokenSecret={setAccessTokenSecret} setAccessTokenKey={setAccessTokenKey} />}
-      {user ? <AddHabit /> : null }
+      <Suspense fallback={renderLoader()}>
+        { user ? <SideNavSwipe openNav={openNav} /> : null }
+        <SideNav closeNav={closeNav}/>
+        <header>
+          <Clock />
+        </header>
+        {user ? <HabitList /> : <TwitterSignIn setAccessTokenSecret={setAccessTokenSecret} setAccessTokenKey={setAccessTokenKey} />}
+        {user ? <AddHabit /> : null }
       </Suspense>
     </div>
   );

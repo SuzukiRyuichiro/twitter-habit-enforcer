@@ -218,3 +218,43 @@
     font-size: 18px;
   }
 }
+
+
+.loading-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+}
+
+.loading {
+  font-size: 60spx;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  text-align: center;
+  color: #eeddff;
+  span {
+    display: inline-block;
+    margin: 0 -.05em;
+  }
+}
+
+.loading04 {
+  span {
+    animation: loading04 .7s infinite;
+    @for $i from 1 through 6 {
+      &:nth-child(#{$i+1}) {
+        animation-delay: #{$i*.1}s;
+      }
+    }
+  }
+}
+@keyframes loading04 {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(15px);
+  }
+}
+

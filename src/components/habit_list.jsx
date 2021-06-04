@@ -1,3 +1,4 @@
+import React, { Suspense } from 'react'
 import Habit from "./habit";
 import { app, firestore } from '../base';
 import { useCollectionData } from "react-firebase-hooks/firestore";
