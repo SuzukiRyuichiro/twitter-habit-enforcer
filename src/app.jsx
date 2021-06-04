@@ -13,6 +13,7 @@ const Clock = lazy(() => import("./components/clock"));
 const SideNav = lazy(() => import("./components/side_nav"));
 const SideNavSwipe = lazy(() => import("./components/side_nav_swipe"));
 const AddHabit = lazy(() => import("./components/add_habit"));
+const TwitterSignIn = lazy(() => import('./components/twitter_sign_in'))
 
 const App = () => {
   const [user] = useAuthState(app.auth());
@@ -45,36 +46,4 @@ const App = () => {
     </div>
   );
 }
-
-
-const TwitterSignIn = () => {
-  // Using a popup.
-  const signInWithTwitter = () => {
-    var provider = new firebase.auth.TwitterAuthProvider();
-    firebase
-      .auth()
-      .signInWithPopup(provider)
-      .then(function(result) {
-        // // For accessing the Twitter API.
-        // var token = result.credential.accessToken;
-        // var secret = result.credential.secret;
-        // // The signed-in user info.
-        // var user = result.user;
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        var errorCode = error.code;
-        console.log(errorCode);
-        var errorMessage = error.message;
-        console.log(errorMessage);
-      });
-  };
-
-  return (
-    <button onClick={signInWithTwitter} className="sign-in-with-twitter">
-      Sign in with Twitter
-    </button>
-  );
-}
-
 export default App;
