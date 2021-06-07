@@ -2,7 +2,7 @@ import React, { lazy, Suspense, useState } from "react";
 import "./App.scss";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
-import { app, firebase } from './base'
+import { app } from './base'
 // firebase
 import "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";

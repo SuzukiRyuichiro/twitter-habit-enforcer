@@ -1,8 +1,19 @@
 import React, { useState } from "react";
-import { app, firebase } from '../base'
+import { app, firebase, firestore } from '../base'
 
 const TwitterSignIn = (props) => {
   // Using a popup.
+  const usersRef = firestore.collection("users"); // this is the colletion in the firestore
+
+  const addToken = async (twitter_access_secret, twitter_access_token) => {
+    const { uid } = app.auth().currentUser;
+    await usersRef.add({
+      twitter_access_secret: twitter_access_secret,
+      twitter_access_token: twitter_access_token,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      uid
+    });
+  };
 
   const signInWithTwitter = () => {
     var provider = new firebase.auth.TwitterAuthProvider();
@@ -11,14 +22,9 @@ const TwitterSignIn = (props) => {
       .signInWithPopup(provider)
       .then(function (result) {
         // For accessing the Twitter API.
-        let token = result.credential.accessToken;
-        props.setAccessTokenKey(token);
-        console.log(token);
-        let secret = result.credential.secret;
-        props.setAccessTokenSecret(secret);
-        console.log(secret);
-        // The signed-in user info.
-        let user = result.user;
+        let twitter_access_token = result.credential.accessToken;
+        let twitter_access_secret = result.credential.secret;
+        addToken(twitter_access_secret, twitter_access_token);
       })
       .catch((error) => {
         // Handle Errors here.
