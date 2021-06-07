@@ -22,8 +22,8 @@ const TwitterSignIn = (props) => {
       .signInWithPopup(provider)
       .then(function (result) {
         // For accessing the Twitter API.
-        let twitter_access_token = result.credential.accessToken;
         let twitter_access_secret = result.credential.secret;
+        let twitter_access_token = result.credential.accessToken;
         addToken(twitter_access_secret, twitter_access_token);
       })
       .catch((error) => {

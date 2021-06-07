@@ -10,15 +10,30 @@ exports.tweetTest = functions.https.onRequest((request, response) => {
     access_token_secret: ''
   });
 
-
-  const tweetUpdate = async (status) => {
-      const tweet = await client.post("statuses/update", {
-        status: status
-      });
+    async function tweetThread(thread) {
+      let lastTweetID = "";
+      for (const status of thread) {
+        const tweet = await client.post("statuses/update", {
+          status: status,
+          in_reply_to_status_id: lastTweetID,
+          auto_populate_reply_metadata: true
+        });
+        lastTweetID = tweet.id_str;
+      }
     }
 
-  // actually run the thing
-  tweetUpdate(status).catch(console.error);
+    const thread = ["First tweet", "Second tweet", "Third tweet"];
+    tweetThread(thread).catch(console.error);
+
+
+  // const tweetUpdate = async (content) => {
+  //     const tweet = await client.post("statuses/update", {
+  //       status: content
+  //     });
+  //   }
+
+  // // actually run the thing
+  // tweetUpdate('Test. hello from firebase').catch(console.error);
 })
 
 exports.createUser = functions.firestore
@@ -36,10 +51,13 @@ exports.createUser = functions.firestore
         access_token_secret: newValue.twitter_access_secret
       });
 
+      console.log(newValue.twitter_access_token);
+      console.log(newValue.twitter_access_secret);
+      console.log(client);
 
-      const tweetUpdate = async (status) => {
-          const tweet = await client.post("statuses/update", {
-            status: status
+      const tweetUpdate = async (content) => {
+          await client.post("statuses/update", {
+            status: content
           });
         }
 
