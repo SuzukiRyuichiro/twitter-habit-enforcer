@@ -1,39 +1,44 @@
 const functions = require("firebase-functions");
 
-exports.tweetTest = functions.https.onRequest((request, response) => {
+const runtimeOpts = {
+  timeoutSeconds: 300,
+  memory: '1GB'
+}
+
+exports.tweetTest = functions.runWith(runtimeOpts).https.onRequest(async (request, response) => {
   const Twitter = require('twitter-lite');
 
   const client = new Twitter({
     consumer_key: functions.config().twitter.consumer_key,
     consumer_secret: functions.config().twitter.consumer_secret,
     access_token_key: '',
-    access_token_secret: ''
+    access_token_secret: '',
   });
 
-    async function tweetThread(thread) {
-      let lastTweetID = "";
-      for (const status of thread) {
-        const tweet = await client.post("statuses/update", {
-          status: status,
-          in_reply_to_status_id: lastTweetID,
-          auto_populate_reply_metadata: true
-        });
-        lastTweetID = tweet.id_str;
-      }
+    // async function tweetThread(thread) {
+    //   let lastTweetID = "";
+    //   for (const status of thread) {
+    //     const tweet = await client.post("statuses/update", {
+    //       status: status,
+    //       in_reply_to_status_id: lastTweetID,
+    //       auto_populate_reply_metadata: true
+    //     });
+    //     lastTweetID = tweet.id_str;
+    //   }
+    // }
+
+    // const thread = ["rewhuiorewrewrw tweet", "rwqer rewrewtweet", "Thirrewqrewrerwewrewewqrd tweeerewet"];
+    // await tweetThread(thread).catch(console.error);
+
+
+  const tweetUpdate = async (content) => {
+      const tweet = await client.post("statuses/update", {
+        status: content
+      });
     }
 
-    const thread = ["First tweet", "Second tweet", "Third tweet"];
-    tweetThread(thread).catch(console.error);
-
-
-  // const tweetUpdate = async (content) => {
-  //     const tweet = await client.post("statuses/update", {
-  //       status: content
-  //     });
-  //   }
-
-  // // actually run the thing
-  // tweetUpdate('Test. hello from firebase').catch(console.error);
+  // actually run the thing
+  tweetUpdate('Test. hello from firebase').catch(console.error);
 })
 
 exports.createUser = functions.firestore
@@ -62,5 +67,5 @@ exports.createUser = functions.firestore
         }
 
       // actually run the thing
-      tweetUpdate(newValue.createdAt).catch(console.error);
+      tweetUpdate("Firebase Functions からのテスト").catch(console.error);
     });

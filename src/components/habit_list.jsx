@@ -7,8 +7,7 @@ const HabitList = () => {
   const habitsRef = firestore.collection("habits"); // this is the colletion in the firestore
   const [habits, loading, error] = useCollectionData(
     habitsRef
-      .where("uid", "==", app.auth().currentUser.uid)
-      .orderBy("createdAt"),
+      .where("uid", "==", app.auth().currentUser.uid),
     { idField: "id" }
   ); // attach with unique id and so on
 

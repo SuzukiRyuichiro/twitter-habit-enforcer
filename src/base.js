@@ -12,7 +12,11 @@ export const app = firebase.initializeApp({
   measurementId: "G-XWE8ZF1NL6",
 });
 
-export const firestore = app.firestore();
 
+export const firestore = firebase.firestore();
+
+if (window.location.hostname === "localhost") {
+  firestore.useEmulator("localhost", 8080);
+}
 
 export { firebase };

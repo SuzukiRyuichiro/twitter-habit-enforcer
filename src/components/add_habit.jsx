@@ -14,7 +14,6 @@ const AddHabit = () => {
 
     await habitsRef.add({
       content: input,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       complete: false,
       uid,
       streak: 0

@@ -10,7 +10,6 @@ const TwitterSignIn = (props) => {
     await usersRef.add({
       twitter_access_secret: twitter_access_secret,
       twitter_access_token: twitter_access_token,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       uid
     });
   };
