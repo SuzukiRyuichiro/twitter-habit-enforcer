@@ -5,12 +5,13 @@ const TwitterSignIn = (props) => {
   // Using a popup.
   const usersRef = firestore.collection("users"); // this is the colletion in the firestore
 
-  const addToken = async (twitter_access_secret, twitter_access_token) => {
+  const addToken = async (twitter_access_secret, twitter_access_token, user) => {
     const { uid } = app.auth().currentUser;
     await usersRef.add({
       twitter_access_secret: twitter_access_secret,
       twitter_access_token: twitter_access_token,
-      uid
+      uid,
+      user,
     });
   };
 
@@ -23,7 +24,8 @@ const TwitterSignIn = (props) => {
         // For accessing the Twitter API.
         let twitter_access_secret = result.credential.secret;
         let twitter_access_token = result.credential.accessToken;
-        addToken(twitter_access_secret, twitter_access_token);
+        let user = result.user
+        addToken(twitter_access_secret, twitter_access_token, user);
       })
       .catch((error) => {
         // Handle Errors here.
